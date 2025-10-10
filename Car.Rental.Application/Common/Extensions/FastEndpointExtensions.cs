@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Car.Rental.Application.Common.Processor;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 
-namespace Car.Rental.Application.Extensions;
+namespace Car.Rental.Application.Common.Extensions;
 
 public static class FastEndpointExtensions
 {
@@ -17,6 +18,10 @@ public static class FastEndpointExtensions
                 c.Serializer.Options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 c.Serializer.Options.Converters.Add(new JsonStringEnumConverter());
                 c.Endpoints.RoutePrefix = "api";
+                c.Endpoints.Configurator = ep =>
+                {
+                    ep.PreProcessor<UserContextProcessor>(Order.Before);
+                };
             })
             .UseSwaggerGen();
          return app;

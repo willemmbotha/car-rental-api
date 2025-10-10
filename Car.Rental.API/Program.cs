@@ -1,4 +1,5 @@
-using Car.Rental.Application.Extensions;
+using Car.Rental.Application.Common.Extensions;
+using Car.Rental.Application.Common.Shared;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 
@@ -11,22 +12,23 @@ builder.Services
     {
         o.IncludeAbstractValidators = true;
     })
-    .SwaggerDocument((o =>
+    .SwaggerDocument(o =>
     {
         o.DocumentSettings = s =>
         {
-            s.Title = "EG API";
+            s.Title = "Car Rental API";
             s.Version = "v1";
                 
         };
-    }));
+    });
 
 builder.Services.AddFusionCache();
-builder.Services.AddDbContext();
+// builder.Services.AddDbContext(builder.Configuration);
+builder.Services.AddScoped<CurrentUserContext>();
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
-MainExtensions.UseFastEndpoints(app);
+app.UseFastEndpoints();
 
 app.Run();

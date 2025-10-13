@@ -1,5 +1,5 @@
-using Car.Rental.Application.Common.Extensions;
-using Car.Rental.Application.Common.Shared;
+using Car.Rental.Application.Shared.Extensions;
+using Car.Rental.Persistence.Common.UserContext;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 

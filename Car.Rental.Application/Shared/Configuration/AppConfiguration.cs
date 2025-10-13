@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Car.Rental.Application.Common.Shared;
+namespace Car.Rental.Application.Shared.Configuration;
 
 public class AppConfiguration : IConfigurationSource
 {

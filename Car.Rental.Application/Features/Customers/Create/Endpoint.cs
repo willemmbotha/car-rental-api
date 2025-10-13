@@ -1,4 +1,4 @@
-﻿using Car.Rental.Application.Common.Shared;
+﻿using Car.Rental.Persistence.Common.UserContext;
 using FastEndpoints;
 
 namespace Car.Rental.Application.Features.Customers.Create;

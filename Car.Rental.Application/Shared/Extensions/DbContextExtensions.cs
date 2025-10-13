@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 
-namespace Car.Rental.Application.Common.Extensions;
+namespace Car.Rental.Application.Shared.Extensions;
 
 public static class DbContextExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace Car.Rental.Application.Common.Shared;
+﻿namespace Car.Rental.Persistence.Common.UserContext;
 
 public sealed class CurrentUserContext
 {

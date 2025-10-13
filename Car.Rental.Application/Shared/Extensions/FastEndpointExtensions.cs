@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using Car.Rental.Application.Common.Processor;
+using Car.Rental.Application.Shared.Processor;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 
-namespace Car.Rental.Application.Common.Extensions;
+namespace Car.Rental.Application.Shared.Extensions;
 
 public static class FastEndpointExtensions
 {

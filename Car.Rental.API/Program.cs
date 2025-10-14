@@ -5,25 +5,21 @@ using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services 
+builder.Services
     // .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens")
     // .AddAuthorization() 
-    .AddFastEndpoints(o =>
-    {
-        o.IncludeAbstractValidators = true;
-    })
+    .AddFastEndpoints(o => { o.IncludeAbstractValidators = true; })
     .SwaggerDocument(o =>
     {
         o.DocumentSettings = s =>
         {
             s.Title = "Car Rental API";
             s.Version = "v1";
-                
         };
     });
 
 builder.Services.AddFusionCache();
-// builder.Services.AddDbContext(builder.Configuration);
+builder.Services.AddDbContext();
 builder.Services.AddScoped<CurrentUserContext>();
 
 var app = builder.Build();

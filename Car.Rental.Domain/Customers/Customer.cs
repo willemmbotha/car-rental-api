@@ -9,3 +9,11 @@ public sealed class Customer : AuditableEntity
     public string Email { get; set; } = null!;
     public string Address { get; set; } = null!;
 }
+
+public static class CustomerConstants
+{
+    public const int FirstNameMaxLength = 255;
+    public const int LastNameMaxLength = 255;
+    public const int EmailMaxLength = 320;
+    public const int AddressMaxLength = 500;
+}

@@ -1,4 +1,6 @@
-﻿namespace Car.Rental.Domain.Shared;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Car.Rental.Domain.Shared;
 
 public abstract class AuditableEntity
 {
@@ -13,6 +15,8 @@ public abstract class AuditableEntity
     public string? DeletedBy { get; set; }
     public DateTimeOffset? DeletedDate { get; set; }
     public bool IsDeleted { get; set; }
+    
+    [NotMapped]
     public bool? IgnoreSoftDelete { get; set; }
     
     public uint RowVersion { get; set; }

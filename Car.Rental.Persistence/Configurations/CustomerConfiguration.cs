@@ -12,5 +12,17 @@ public class CustomerConfiguration: IEntityTypeConfiguration<Customer>
         builder.ConfigureAuditFields();
 
         builder.ToTable(nameof(Customer));
+        
+        builder.Property(x => x.FirstName)
+            .HasMaxLength(CustomerConstants.FirstNameMaxLength);
+        
+        builder.Property(x => x.LastName)
+            .HasMaxLength(CustomerConstants.LastNameMaxLength);
+        
+        builder.Property(x => x.Email)
+            .HasMaxLength(CustomerConstants.EmailMaxLength);
+        
+        builder.Property(x => x.Address)
+            .HasMaxLength(CustomerConstants.AddressMaxLength);
     }
 }

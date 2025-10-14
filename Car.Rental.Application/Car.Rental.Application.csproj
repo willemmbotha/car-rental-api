@@ -12,6 +12,7 @@
         <PackageReference Include="FastEndpoints.Security" Version="7.0.1" />
         <PackageReference Include="FastEndpoints.Swagger" Version="7.0.1" />
         <PackageReference Include="Google.Cloud.SecretManager.V1" Version="2.6.0" />
+        <PackageReference Include="Gridify.EntityFramework" Version="2.17.0" />
         <PackageReference Include="ZiggyCreatures.FusionCache" Version="2.4.0" />
     </ItemGroup>
 

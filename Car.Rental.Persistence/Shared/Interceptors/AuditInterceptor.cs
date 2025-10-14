@@ -31,6 +31,9 @@ public class AuditInterceptor(CurrentUserContext currentUserContext) : SaveChang
                                                throw new InvalidOperationException("Current user is null");
                     break;
                 case EntityState.Deleted:
+                    if (entry.Entity.IgnoreSoftDelete is true)
+                        continue;
+                    
                     entry.State = EntityState.Modified;
                     entry.Entity.DeletedDate = DateTimeOffset.UtcNow;
                     entry.Entity.DeletedBy  = currentUserContext.Username ?? 

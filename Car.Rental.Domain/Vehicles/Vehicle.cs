@@ -14,3 +14,13 @@ public sealed class Vehicle: AuditableEntity
     public DateTimeOffset LicenseExpiryDate { get; set; }
     public VehicleStatus VehicleStatus { get; set; }
 }
+
+public static class VehicleConstants
+{
+    public const int DisplayNameMaxLength = 255;
+    public const int RegistrationNumberMaxLength = 100;
+    public const int MakeMaxLength = 255;
+    public const int ModelMaxLength = 255;
+    public const int FuelTypeMaxLength = 100;
+    public const int VehicleStatusMaxLength = 100;
+}

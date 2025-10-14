@@ -27,3 +27,8 @@ public sealed class Rental : AuditableEntity
     
     public RentalStatus RentalStatus { get; set; } 
 }
+
+public static class RentalConstants
+{
+    public const int RentalStatusMaxLength = 100;
+}

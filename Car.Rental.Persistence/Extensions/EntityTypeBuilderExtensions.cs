@@ -27,9 +27,6 @@ public static class EntityTypeBuilderExtensions
                 case nameof(AuditableEntity.RowVersion):
                     entityTypeBuilder.Property(prop.Name).IsRowVersion();
                     break;
-                case nameof(AuditableEntity.IgnoreSoftDelete):
-                    entityTypeBuilder.Ignore(prop.Name);
-                    break;
             }
         }
         return entityTypeBuilder;

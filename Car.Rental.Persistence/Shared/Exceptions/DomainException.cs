@@ -1,6 +1,6 @@
 ﻿namespace Car.Rental.Persistence.Shared.Exceptions;
 
-public class DomainException: Exception
+public class DomainException : Exception
 {
     public DomainException()
     {

@@ -14,7 +14,6 @@ public static class EntityTypeBuilderExtensions
             typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (var prop in allEntityProps)
-        {
             switch (prop.Name)
             {
                 case nameof(AuditableEntity.Id):
@@ -28,7 +27,7 @@ public static class EntityTypeBuilderExtensions
                     entityTypeBuilder.Property(prop.Name).IsRowVersion();
                     break;
             }
-        }
+
         return entityTypeBuilder;
     }
 }

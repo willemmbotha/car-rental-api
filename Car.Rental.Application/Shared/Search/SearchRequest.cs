@@ -5,8 +5,8 @@ public class SearchRequest
     public List<Filter> Filters { get; set; } = [];
     public string LogicalOperator { get; set; } = "|";
     public List<Order> OrderBy { get; set; } = [];
-    public int Page { get; set; } 
-    public int PageSize { get; set; }
+    public int Page { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 }
 
 public class Filter

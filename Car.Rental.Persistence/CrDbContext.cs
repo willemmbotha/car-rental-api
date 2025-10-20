@@ -11,4 +11,12 @@ public class CrDbContext(DbContextOptions<CrDbContext> options) : DbContext(opti
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Domain.Rentals.Rental> Rentals { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("CR");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CrDbContext).Assembly);
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace Car.Rental.Domain.Vehicles;
 
-public sealed class Vehicle: AuditableEntity
+public sealed class Vehicle : AuditableEntity
 {
     public string DisplayName { get; set; } = null!;
     public string RegistrationNumber { get; set; } = null!;

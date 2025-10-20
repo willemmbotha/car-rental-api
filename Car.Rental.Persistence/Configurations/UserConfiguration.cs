@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Car.Rental.Persistence.Configurations;
 
-public class UserConfiguration: IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
@@ -15,10 +15,10 @@ public class UserConfiguration: IEntityTypeConfiguration<User>
 
         builder.Property(x => x.FirstName)
             .HasMaxLength(UserConstants.FirstNameMaxLength);
-        
+
         builder.Property(x => x.LastName)
             .HasMaxLength(UserConstants.LastNameMaxLength);
-        
+
         builder.Property(x => x.Email)
             .HasMaxLength(UserConstants.EmailMaxLength);
     }

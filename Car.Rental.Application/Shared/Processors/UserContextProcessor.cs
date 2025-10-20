@@ -1,4 +1,4 @@
-﻿using Car.Rental.Persistence.Common.UserContext;
+﻿using Car.Rental.Persistence.Shared.UserContext;
 using FastEndpoints;
 
 namespace Car.Rental.Application.Shared.Processors;

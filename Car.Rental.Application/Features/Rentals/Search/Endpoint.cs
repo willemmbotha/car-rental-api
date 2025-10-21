@@ -26,7 +26,12 @@ public class Endpoint : Endpoint<SearchRequest, SearchResponse<RentalDto>>
         var result = await _crDbContext.Rentals
             .Select(x => new RentalDto
             {
-                Id = x.Id
+                Id = x.Id,
+                CustomerId = x.CustomerId,
+                EndDate = x.EndDate,
+                RentalStatus = x.RentalStatus,
+                StartDate = x.EndDate,
+                VehicleId = x.VehicleId
             })
             .SearchAsync(req, ct);
 

@@ -6,13 +6,29 @@ using Car.Rental.Persistence.Extensions;
 using FastEndpoints;
 using FastEndpoints.AspVersioning;
 using FastEndpoints.Swagger;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Warning()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("AppConfiguration")
-                          ?? throw new InvalidOperationException("The connection string 'AppConfiguration' was not found.");
+                       ?? throw new InvalidOperationException("The connection string 'AppConfiguration' was not found.");
 
 builder.Configuration.AddAzureAppConfiguration(connectionString);
+
+builder.Services.AddSerilog();
+
+builder.Services.AddAuthentication()
+    .AddJwtBearer("Descope", options =>
+    {
+        options.Audience = builder.Configuration["Descope:Audience"] ?? throw new InvalidOperationException("The Audience configuration was not found.");
+        options.Authority = builder.Configuration["Descope:Authority"] ?? throw new InvalidOperationException("The Authority configuration was not found.");
+    });
 
 builder.Services.AddAuthorization()
     .AddFastEndpoints(o => { o.IncludeAbstractValidators = true; })

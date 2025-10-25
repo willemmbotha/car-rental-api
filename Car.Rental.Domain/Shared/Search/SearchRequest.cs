@@ -1,4 +1,4 @@
-﻿namespace Car.Rental.Application.Shared.Search;
+﻿namespace Car.Rental.Domain.Shared.Search;
 
 public class SearchRequest
 {

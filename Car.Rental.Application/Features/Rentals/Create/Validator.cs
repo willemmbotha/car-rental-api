@@ -1,4 +1,5 @@
-﻿using Car.Rental.Persistence;
+﻿using Car.Rental.Domain.Customers;
+using Car.Rental.Domain.Vehicles;
 using FastEndpoints;
 using FluentValidation;
 
@@ -17,7 +18,7 @@ public class Validator : Validator<Request>
             .NotEmpty()
             .Must(VehicleMustExist)
             .WithMessage("Vehicle does not exist.");
-            
+
         RuleFor(x => x.StartDate)
             .NotEmpty()
             .LessThan(x => x.EndDate)
@@ -32,18 +33,14 @@ public class Validator : Validator<Request>
             .IsInEnum()
             .WithMessage("Invalid rental status specified.");
     }
-    
+
     private bool VehicleMustExist(long id)
     {
-        return Resolve<CrDbContext>()
-            .Vehicles
-            .Any(x => x.Id == id);
+        return Resolve<IVehicleRepository>().Any(x => x.Id == id);
     }
-    
+
     private bool CustomerMustExist(long id)
     {
-        return Resolve<CrDbContext>()
-            .Customers
-            .Any(x => x.Id == id);
+        return Resolve<ICustomerRepository>().Any(x => x.Id == id);
     }
 }

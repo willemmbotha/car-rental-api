@@ -13,7 +13,7 @@ public sealed class Mapper : Mapper<Request, RentalDto, Domain.Rentals.Rental>
             VehicleId = e.VehicleId,
             EndDate = e.EndDate,
             RentalStatus = e.RentalStatus,
-            StartDate = e.StartDate,
+            StartDate = e.StartDate
         };
     }
 

@@ -1,5 +1,5 @@
 ﻿using Car.Rental.Domain.Shared;
-using Car.Rental.Persistence.Shared.UserContext;
+using Car.Rental.Domain.Shared.UserContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -10,10 +10,10 @@ public class AuditInterceptor(CurrentUserContext currentUserContext) : SaveChang
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
-        CancellationToken cancellationToken = default)
+        CancellationToken ct = default)
     {
         if (eventData.Context is null)
-            return base.SavingChangesAsync(eventData, result, cancellationToken);
+            return base.SavingChangesAsync(eventData, result, ct);
 
         var entries = eventData.Context.ChangeTracker.Entries<AuditableEntity>();
 
@@ -22,12 +22,12 @@ public class AuditInterceptor(CurrentUserContext currentUserContext) : SaveChang
             {
                 case EntityState.Added:
                     entry.Entity.CreatedDate = DateTimeOffset.UtcNow;
-                    entry.Entity.CreatedBy = currentUserContext.Username ??
+                    entry.Entity.CreatedBy = currentUserContext.DescopeUserId ??
                                              throw new InvalidOperationException("Current user is null");
                     break;
                 case EntityState.Modified:
                     entry.Entity.ModifiedDate = DateTimeOffset.UtcNow;
-                    entry.Entity.ModifiedBy = currentUserContext.Username ??
+                    entry.Entity.ModifiedBy = currentUserContext.DescopeUserId ??
                                               throw new InvalidOperationException("Current user is null");
                     break;
                 case EntityState.Deleted:
@@ -36,12 +36,12 @@ public class AuditInterceptor(CurrentUserContext currentUserContext) : SaveChang
 
                     entry.State = EntityState.Modified;
                     entry.Entity.DeletedDate = DateTimeOffset.UtcNow;
-                    entry.Entity.DeletedBy = currentUserContext.Username ??
+                    entry.Entity.DeletedBy = currentUserContext.DescopeUserId ??
                                              throw new InvalidOperationException("Current user is null");
                     entry.Entity.IsDeleted = true;
                     break;
             }
 
-        return base.SavingChangesAsync(eventData, result, cancellationToken);
+        return base.SavingChangesAsync(eventData, result, ct);
     }
 }

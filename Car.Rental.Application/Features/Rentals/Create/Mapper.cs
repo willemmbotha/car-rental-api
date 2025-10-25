@@ -6,7 +6,7 @@ public sealed class Mapper : Mapper<Request, RentalDto, Domain.Rentals.Rental>
 {
     public override Domain.Rentals.Rental ToEntity(Request r)
     {
-        return new Domain.Rentals.Rental()
+        return new Domain.Rentals.Rental
         {
             RentalStatus = r.RentalStatus,
             CustomerId = r.CustomerId,
@@ -25,7 +25,7 @@ public sealed class Mapper : Mapper<Request, RentalDto, Domain.Rentals.Rental>
             VehicleId = e.VehicleId,
             EndDate = e.EndDate,
             RentalStatus = e.RentalStatus,
-            StartDate = e.StartDate,
+            StartDate = e.StartDate
         };
     }
 }

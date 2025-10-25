@@ -1,5 +1,4 @@
 ﻿using Car.Rental.Domain.Vehicles;
-using Car.Rental.Persistence;
 using FastEndpoints;
 using FluentValidation;
 
@@ -51,8 +50,6 @@ public class Validator : Validator<Request>
 
     private bool RegistrationNumberMustNotExist(string registrationNumber)
     {
-        return !Resolve<CrDbContext>()
-            .Vehicles
-            .Any(x => x.RegistrationNumber == registrationNumber);
+        return !Resolve<IVehicleRepository>().Any(x => x.RegistrationNumber == registrationNumber);
     }
 }

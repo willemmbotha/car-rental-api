@@ -1,12 +1,13 @@
-﻿using FastEndpoints;
+﻿using Car.Rental.Domain.Users;
+using FastEndpoints;
 
 namespace Car.Rental.Application.Features.Users.Create;
 
-public sealed class Mapper : Mapper<Request, Response, Domain.Users.User>
+public sealed class Mapper : Mapper<Request, Response, User>
 {
-    public override Domain.Users.User ToEntity(Request r)
+    public override User ToEntity(Request r)
     {
-        return new Domain.Users.User
+        return new User
         {
             Email = r.Email,
             FirstName = r.FirstName,

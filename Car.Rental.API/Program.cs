@@ -1,15 +1,20 @@
 using Asp.Versioning;
+using Azure.Identity;
 using Car.Rental.Application.Shared.Extensions;
-using Car.Rental.Persistence.Shared.UserContext;
+using Car.Rental.Domain.Shared.UserContext;
+using Car.Rental.Persistence.Extensions;
 using FastEndpoints;
 using FastEndpoints.AspVersioning;
 using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    // .AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens")
-    // .AddAuthorization() 
+var connectionString = builder.Configuration.GetConnectionString("AppConfiguration")
+                          ?? throw new InvalidOperationException("The connection string 'AppConfiguration' was not found.");
+
+builder.Configuration.AddAzureAppConfiguration(connectionString);
+
+builder.Services.AddAuthorization()
     .AddFastEndpoints(o => { o.IncludeAbstractValidators = true; })
     .AddVersioning(o =>
     {
@@ -31,12 +36,16 @@ builder.Services
     });
 
 builder.Services.AddFusionCache();
-builder.Services.AddDbContext();
+builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddScoped<CurrentUserContext>();
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
-app.UseFastEndpoints();
+app.UseAuthentication()
+    .UseAuthorization()
+    .AddApplication()
+    .UseSwaggerGen()
+    .UseDefaultExceptionHandler();
 
 app.Run();

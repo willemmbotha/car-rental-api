@@ -1,5 +1,4 @@
 ﻿using Car.Rental.Domain.Customers;
-using Car.Rental.Persistence;
 using FastEndpoints;
 using FluentValidation;
 
@@ -31,8 +30,6 @@ public class Validator : Validator<Request>
 
     private bool EmailAddressMustNotExist(string email)
     {
-        return !Resolve<CrDbContext>()
-            .Customers
-            .Any(x => x.Email == email);
+        return !Resolve<ICustomerRepository>().Any(x => x.Email == email);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Car.Rental.Persistence;
+﻿using Car.Rental.Domain.Vehicles;
 using FastEndpoints;
 using FluentValidation;
 
@@ -16,8 +16,6 @@ public class Validator : Validator<Request>
 
     private bool VehicleMustExist(long id)
     {
-        return Resolve<CrDbContext>()
-            .Vehicles
-            .Any(x => x.Id == id);
+        return Resolve<IVehicleRepository>().Any(x => x.Id == id);
     }
 }

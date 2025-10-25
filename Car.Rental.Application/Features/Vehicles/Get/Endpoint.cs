@@ -1,29 +1,19 @@
-﻿using Car.Rental.Persistence;
+﻿using Car.Rental.Domain.Vehicles;
 using FastEndpoints;
-using Microsoft.EntityFrameworkCore;
 
 namespace Car.Rental.Application.Features.Vehicles.Get;
 
-public class Endpoint : Endpoint<Request, VehicleDto, Mapper>
+public class Endpoint(IVehicleRepository vehicleRepository) : Endpoint<Request, VehicleDto, Mapper>
 {
-    private readonly CrDbContext _crDbContext;
-
-    public Endpoint(CrDbContext crDbContext)
-    {
-        _crDbContext = crDbContext;
-    }
-
     public override void Configure()
     {
         Get("/{vehicleId}");
         Group<VehicleGroup>();
-        AllowAnonymous();
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
-        var vehicle = await _crDbContext.Vehicles
-            .SingleAsync(x => x.Id == req.VehicleId, ct);
+        var vehicle = await vehicleRepository.GetByIdAsync(req.VehicleId, ct);
 
         await Send.OkAsync(Map.FromEntity(vehicle), ct);
     }

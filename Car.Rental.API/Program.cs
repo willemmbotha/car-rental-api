@@ -57,7 +57,6 @@ builder.Services.AddScoped<CurrentUserContext>();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 app.UseAuthentication()
     .UseAuthorization()
     .AddApplication()

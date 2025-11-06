@@ -68,7 +68,8 @@ public abstract class Repository<T>(CrDbContext context)
 
     public virtual async Task<SearchResponse<TResponse>> SearchAsync<TResponse>(SearchRequest request, CancellationToken ct)
     {
-        var filter = string.Join(request.LogicalOperator, request.Filters);
+        var filters = request.Filters.Select(x => $"{x.PropertyName} {x.Operator} {x.Value} ");
+        var filter = string.Join(request.LogicalOperator, filters);
         var order = string.Join(",", request.OrderBy
             .Select(x => $"{x.PropertyName} {x.Direction}")
             .ToList());
@@ -92,7 +93,8 @@ public abstract class Repository<T>(CrDbContext context)
 
     public virtual async Task<List<TResponse>> SearchNoCountAsync<TResponse>(SearchRequest request, CancellationToken ct)
     {
-        var filter = string.Join(request.LogicalOperator, request.Filters);
+        var filters = request.Filters.Select(x => $"{x.PropertyName} {x.Operator} {x.Value} ");
+        var filter = string.Join(request.LogicalOperator, filters);
         var order = string.Join(",", request.OrderBy
             .Select(x => $"{x.PropertyName} {x.Direction}")
             .ToList());

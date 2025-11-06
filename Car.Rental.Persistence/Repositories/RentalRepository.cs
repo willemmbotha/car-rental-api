@@ -11,7 +11,8 @@ internal sealed class RentalRepository(CrDbContext dbContext) : Repository<Domai
 
     public async Task<SearchResponse<Domain.Rentals.Rental>> SearchRentalsAsync(SearchRequest request, CancellationToken ct)
     {
-        var filter = string.Join(request.LogicalOperator, request.Filters);
+        var filters = request.Filters.Select(x => $"{x.PropertyName} {x.Operator} {x.Value} ");
+        var filter = string.Join(request.LogicalOperator, filters);
         var order = string.Join(",", request.OrderBy
             .Select(x => $"{x.PropertyName} {x.Direction}")
             .ToList());

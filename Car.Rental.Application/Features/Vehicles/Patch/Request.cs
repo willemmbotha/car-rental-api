@@ -14,4 +14,6 @@ public sealed record Request
     public FuelType? FuelType { get; init; }
     public DateTimeOffset? LicenseExpiryDate { get; init; }
     public VehicleStatus? VehicleStatus { get; init; }
+    public string? PhotoUrl { get; init; }
+    public decimal? RentalPrice { get; init; }
 }

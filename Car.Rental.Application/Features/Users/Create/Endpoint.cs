@@ -13,7 +13,6 @@ public class Endpoint(IUserRepository userRepository) : Endpoint<Request, Respon
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
-        // Put on some queue maybe?
         var user = Map.ToEntity(req);
 
         await userRepository.AddAsync(user, ct);

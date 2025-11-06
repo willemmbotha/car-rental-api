@@ -1,5 +1,4 @@
 using Asp.Versioning;
-using Azure.Identity;
 using Car.Rental.Application.Shared.Extensions;
 using Car.Rental.Domain.Shared.UserContext;
 using Car.Rental.Persistence.Extensions;

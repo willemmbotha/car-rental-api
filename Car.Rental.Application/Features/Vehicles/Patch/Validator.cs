@@ -76,6 +76,18 @@ public class Validator : Validator<Request>
                 .IsInEnum()
                 .WithMessage("Invalid vehicle status specified.");
         });
+
+        When(x => x.PhotoUrl != null, () =>
+        {
+            RuleFor(x => x.PhotoUrl)
+                .MaximumLength(VehicleConstants.PhotoUrlMaxLength);
+        });
+
+        When(x => x.RentalPrice != null, () =>
+        {
+            RuleFor(x => x.RentalPrice)
+                .GreaterThan(0);
+        });
     }
 
     private bool VehicleMustExist(long id)

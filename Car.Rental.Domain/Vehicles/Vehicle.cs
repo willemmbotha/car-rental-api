@@ -13,6 +13,8 @@ public sealed class Vehicle : AuditableEntity
     public FuelType FuelType { get; set; }
     public DateTimeOffset LicenseExpiryDate { get; set; }
     public VehicleStatus VehicleStatus { get; set; }
+    public string? PhotoUrl { get; set; }
+    public decimal RentalPrice { get; set; }
 }
 
 public static class VehicleConstants
@@ -23,4 +25,5 @@ public static class VehicleConstants
     public const int ModelMaxLength = 255;
     public const int FuelTypeMaxLength = 100;
     public const int VehicleStatusMaxLength = 100;
+    public const int PhotoUrlMaxLength = 2000;
 }

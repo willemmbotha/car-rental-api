@@ -17,7 +17,9 @@ public sealed class Mapper : Mapper<Request, VehicleDto, Vehicle>
             Model = r.Model,
             Year = r.Year,
             DisplayName = r.DisplayName,
-            RegistrationNumber = r.RegistrationNumber
+            RegistrationNumber = r.RegistrationNumber,
+            PhotoUrl = r.PhotoUrl,
+            RentalPrice = r.RentalPrice,
         };
     }
 
@@ -34,7 +36,9 @@ public sealed class Mapper : Mapper<Request, VehicleDto, Vehicle>
             Model = e.Model,
             Year = e.Year,
             DisplayName = e.DisplayName,
-            RegistrationNumber = e.RegistrationNumber
+            RegistrationNumber = e.RegistrationNumber,
+            PhotoUrl = e.PhotoUrl,
+            RentalPrice = e.RentalPrice
         };
     }
 }

@@ -46,6 +46,15 @@ public class Validator : Validator<Request>
         RuleFor(x => x.VehicleStatus)
             .IsInEnum()
             .WithMessage("Invalid vehicle status specified.");
+
+        When(x => x.PhotoUrl != null, () =>
+        {
+            RuleFor(x => x.PhotoUrl)
+                .MaximumLength(VehicleConstants.PhotoUrlMaxLength);
+        });
+
+        RuleFor(x => x.RentalPrice)
+            .GreaterThan(0);
     }
 
     private bool RegistrationNumberMustNotExist(string registrationNumber)

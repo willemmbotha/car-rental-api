@@ -38,5 +38,10 @@ public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
         builder.Property(x => x.VehicleStatus)
             .HasConversion<string>()
             .HasMaxLength(VehicleConstants.VehicleStatusMaxLength);
+
+        builder.Property(x => x.PhotoUrl)
+            .HasMaxLength(VehicleConstants.PhotoUrlMaxLength);
+
+        builder.Property(x => x.RentalPrice);
     }
 }

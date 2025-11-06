@@ -1,4 +1,5 @@
 ﻿using Car.Rental.Domain.Customers;
+using Car.Rental.Domain.Rentals;
 using FastEndpoints;
 using FluentValidation;
 
@@ -12,10 +13,19 @@ public class Validator : Validator<Request>
             .NotNull()
             .Must(CustomerMustExist)
             .WithMessage("Customer does not exist");
+
+        RuleFor(x => x)
+            .Must(CustomerMustNotHaveRentals)
+            .WithMessage("Cannot delete customer with rentals");
     }
 
     private bool CustomerMustExist(long id)
     {
         return Resolve<ICustomerRepository>().Any(x => x.Id == id);
+    }
+
+    private bool CustomerMustNotHaveRentals(Request request)
+    {
+        return !Resolve<IRentalRepository>().Any(x => x.CustomerId == request.CustomerId);
     }
 }
